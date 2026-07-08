@@ -1,102 +1,46 @@
-export type EventAvailability = "available" | "few" | "sold_out";
+export type EventCategory = "Concert" | "Conference" | "Theater" | "Sports" | "Jazz" | "Comedy";
+export type Availability = "high" | "limited" | "selling-fast";
 
-export type EventItem = {
+export interface EventItem {
   id: string;
-  title: { en: string; fa: string };
-  artist: { en: string; fa: string };
-  venue: { en: string; fa: string };
-  city: { en: string; fa: string };
-  date: string; // ISO
-  genre: "concert" | "sports" | "theater" | "festival" | "comedy";
+  title: string;
+  category: EventCategory;
+  date: string;
+  time: string;
+  venue: string;
+  city: string;
+  image: string;
   priceFrom: number;
-  currency: "USD" | "IRR";
-  availability: EventAvailability;
-  trending?: boolean;
-  image: string; // gradient class token
-};
+  availability: Availability;
+  featured?: boolean;
+  description: string;
+}
 
-// Static seed for the discovery screen. Real data will come from the
-// Event Catalog domain per the PRD.
-export const MOCK_EVENTS: EventItem[] = [
-  {
-    id: "evt-001",
-    title: { en: "Nocturne — World Tour", fa: "نوکتورن — تور جهانی" },
-    artist: { en: "Aria Vespers", fa: "آریا وسپرس" },
-    venue: { en: "Milad Amphitheatre", fa: "آمفی‌تئاتر میلاد" },
-    city: { en: "Tehran", fa: "تهران" },
-    date: "2026-07-24T20:00:00Z",
-    genre: "concert",
-    priceFrom: 45,
-    currency: "USD",
-    availability: "few",
-    trending: true,
-    image: "from-[oklch(0.35_0.18_285)] to-[oklch(0.55_0.20_45)]",
-  },
-  {
-    id: "evt-002",
-    title: { en: "El Clásico — Cup Final", fa: "ال‌کلاسیکو — فینال جام" },
-    artist: { en: "Real vs Barça", fa: "رئال مقابل بارسا" },
-    venue: { en: "Azadi Stadium", fa: "ورزشگاه آزادی" },
-    city: { en: "Tehran", fa: "تهران" },
-    date: "2026-07-19T17:30:00Z",
-    genre: "sports",
-    priceFrom: 30,
-    currency: "USD",
-    availability: "available",
-    trending: true,
-    image: "from-[oklch(0.30_0.15_155)] to-[oklch(0.55_0.18_78)]",
-  },
-  {
-    id: "evt-003",
-    title: { en: "Hamlet — Reimagined", fa: "هملت — بازآفرینی" },
-    artist: { en: "Royal Ensemble", fa: "گروه رویال" },
-    venue: { en: "Vahdat Hall", fa: "تالار وحدت" },
-    city: { en: "Tehran", fa: "تهران" },
-    date: "2026-08-02T19:00:00Z",
-    genre: "theater",
-    priceFrom: 22,
-    currency: "USD",
-    availability: "available",
-    image: "from-[oklch(0.28_0.10_25)] to-[oklch(0.42_0.15_310)]",
-  },
-  {
-    id: "evt-004",
-    title: { en: "Sunburn Festival", fa: "فستیوال سان‌برن" },
-    artist: { en: "40+ artists", fa: "بیش از ۴۰ هنرمند" },
-    venue: { en: "Kish Open Grounds", fa: "زمین باز کیش" },
-    city: { en: "Kish", fa: "کیش" },
-    date: "2026-08-15T16:00:00Z",
-    genre: "festival",
-    priceFrom: 89,
-    currency: "USD",
-    availability: "few",
-    trending: true,
-    image: "from-[oklch(0.40_0.20_45)] to-[oklch(0.30_0.15_320)]",
-  },
-  {
-    id: "evt-005",
-    title: { en: "Late Night Laughs", fa: "خنده‌های نیمه‌شب" },
-    artist: { en: "Sam Delgado", fa: "سام دلگادو" },
-    venue: { en: "Iranshahr Theatre", fa: "تئاتر ایرانشهر" },
-    city: { en: "Tehran", fa: "تهران" },
-    date: "2026-07-11T21:00:00Z",
-    genre: "comedy",
-    priceFrom: 18,
-    currency: "USD",
-    availability: "sold_out",
-    image: "from-[oklch(0.25_0.05_265)] to-[oklch(0.45_0.15_78)]",
-  },
-  {
-    id: "evt-006",
-    title: { en: "Symphonic Nights", fa: "شب‌های سمفونیک" },
-    artist: { en: "Tehran Philharmonic", fa: "فیلارمونیک تهران" },
-    venue: { en: "Roudaki Hall", fa: "تالار رودکی" },
-    city: { en: "Tehran", fa: "تهران" },
-    date: "2026-09-06T20:00:00Z",
-    genre: "concert",
-    priceFrom: 35,
-    currency: "USD",
-    availability: "available",
-    image: "from-[oklch(0.28_0.12_240)] to-[oklch(0.50_0.15_200)]",
-  },
+export const events: EventItem[] = [
+  { id: "northern-lights-tour", title: "Northern Lights Tour", category: "Concert", date: "Aug 14, 2026", time: "20:00", venue: "Mist Arena", city: "Seattle", image: "/images/event-concert.png", priceFrom: 65, availability: "selling-fast", featured: true, description: "An immersive live performance under a canopy of light. The Northern Lights Tour brings a full production of sound and atmosphere to Mist Arena for one night only." },
+  { id: "systems-summit", title: "Systems Summit 2026", category: "Conference", date: "Sep 02, 2026", time: "09:00", venue: "Cascade Convention Center", city: "Portland", image: "/images/event-conference.png", priceFrom: 240, availability: "high", description: "Two days of talks on distributed systems, resilience engineering, and platform architecture from the teams running the largest systems in production." },
+  { id: "the-glass-hour", title: "The Glass Hour", category: "Theater", date: "Aug 22, 2026", time: "19:30", venue: "Meridian Playhouse", city: "Seattle", image: "/images/event-theater.png", priceFrom: 48, availability: "limited", description: "A quietly devastating new play about memory and distance, staged in the round at the historic Meridian Playhouse. Limited six-week engagement." },
+  { id: "cascadia-derby", title: "Cascadia Derby Final", category: "Sports", date: "Sep 12, 2026", time: "17:00", venue: "Summit Stadium", city: "Vancouver", image: "/images/event-stadium.png", priceFrom: 35, availability: "selling-fast", featured: true, description: "The season comes down to ninety minutes. Two rivals, one trophy, and 54,000 seats. The Cascadia Derby Final returns to Summit Stadium." },
+  { id: "blue-note-sessions", title: "Blue Note Sessions", category: "Jazz", date: "Aug 29, 2026", time: "21:00", venue: "The Foghorn Room", city: "Portland", image: "/images/event-jazz.png", priceFrom: 30, availability: "high", description: "An intimate evening of standards and new arrangements from the Pacific Northwest quartet, recorded live for the Blue Note Sessions archive." },
+  { id: "dry-humor-live", title: "Dry Humor, Live", category: "Comedy", date: "Sep 05, 2026", time: "20:30", venue: "Meridian Playhouse", city: "Seattle", image: "/images/event-comedy.png", priceFrom: 28, availability: "limited", description: "One microphone, one hour, zero mercy. A headline set from the sharpest deadpan in the circuit, with two opening acts." },
+];
+
+export const categories: EventCategory[] = ["Concert", "Conference", "Theater", "Sports", "Jazz", "Comedy"];
+export const cities = ["Seattle", "Portland", "Vancouver"];
+export function getEvent(id: string) { return events.find((e) => e.id === id); }
+
+export const recentOrders = [
+  { id: "ORD-8841", buyer: "M. Chen", seats: "C4, C5", total: 240, status: "Paid", time: "2 min ago" },
+  { id: "ORD-8840", buyer: "A. Rivera", seats: "F10", total: 85, status: "Paid", time: "5 min ago" },
+  { id: "ORD-8839", buyer: "J. Okafor", seats: "A1, A2, A3", total: 360, status: "Pending", time: "7 min ago" },
+  { id: "ORD-8838", buyer: "S. Novak", seats: "H7, H8", total: 130, status: "Paid", time: "12 min ago" },
+  { id: "ORD-8837", buyer: "K. Tanaka", seats: "D12", total: 85, status: "Expired", time: "18 min ago" },
+];
+
+export const venues = [
+  { id: "v1", name: "Mist Arena", city: "Seattle", sectors: 4, capacity: 1228, events: 12, status: "Active" },
+  { id: "v2", name: "Cascade Convention Center", city: "Portland", sectors: 6, capacity: 3400, events: 8, status: "Active" },
+  { id: "v3", name: "Meridian Playhouse", city: "Seattle", sectors: 3, capacity: 620, events: 21, status: "Active" },
+  { id: "v4", name: "Summit Stadium", city: "Vancouver", sectors: 12, capacity: 54000, events: 5, status: "Active" },
+  { id: "v5", name: "The Foghorn Room", city: "Portland", sectors: 2, capacity: 180, events: 34, status: "Draft" },
 ];
