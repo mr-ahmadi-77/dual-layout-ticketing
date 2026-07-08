@@ -1,87 +1,94 @@
-import { Link } from "@tanstack/react-router";
-import { Languages, LogOut, Ticket, UserCircle2 } from "lucide-react";
+import { Link, useRouter } from "@tanstack/react-router";
+import { Globe, LogOut, Ticket } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { useRbac, type Role } from "@/lib/rbac";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
-type NavItem = { to: string; labelKey: string; roles: Role[] };
+type NavItem = { to: string; label: string; roles: (Role | "guest")[] };
 
-// RBAC: Each nav item declares which roles may see it. Guests only see Discover.
 const NAV: NavItem[] = [
-  { to: "/", labelKey: "nav.discover", roles: ["guest", "buyer", "organizer", "admin"] },
-  { to: "/buyer", labelKey: "nav.orders", roles: ["buyer"] },
-  { to: "/organizer", labelKey: "nav.events", roles: ["organizer"] },
-  { to: "/admin", labelKey: "nav.dashboard", roles: ["admin"] },
+  { to: "/", label: "Discover", roles: ["guest", "buyer", "organizer", "admin"] },
+  { to: "/buyer", label: "My tickets", roles: ["buyer"] },
+  { to: "/organizer", label: "Dashboard", roles: ["organizer"] },
+  { to: "/admin", label: "Admin", roles: ["admin"] },
 ];
 
 export function AppHeader() {
-  const { t, locale, toggle, dir } = useI18n();
+  const { locale, toggle } = useI18n();
   const { user, role, isAuthenticated, signOut } = useRbac();
+  const router = useRouter();
 
   const visible = NAV.filter((item) => item.roles.includes(role));
 
+  const handleLogout = () => {
+    signOut();
+    router.navigate({ to: "/" });
+  };
+
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-6 px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="flex items-center gap-2 group">
-          <span className="grid h-9 w-9 place-items-center rounded-lg bg-amber-gradient shadow-glow transition-transform group-hover:scale-105">
-            <Ticket className="h-5 w-5 text-primary-foreground" strokeWidth={2.5} />
+    <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-sm">
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:px-6">
+        <Link to="/" className="flex items-center gap-2 font-semibold tracking-tight">
+          <span className="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+            <Ticket className="size-4" aria-hidden />
           </span>
-          <span className="text-lg font-semibold tracking-tight">{t("brand.name")}</span>
+          Summit
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden items-center gap-6 md:flex" aria-label="Main">
           {visible.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground data-[status=active]:text-foreground data-[status=active]:bg-muted"
               activeOptions={{ exact: item.to === "/" }}
+              className={cn(
+                "text-sm text-muted-foreground transition-colors hover:text-foreground",
+                "data-[status=active]:font-medium data-[status=active]:text-foreground",
+              )}
             >
-              {t(item.labelKey)}
+              {item.label}
             </Link>
           ))}
         </nav>
 
-        <div className={dir === "rtl" ? "mr-auto flex items-center gap-2" : "ml-auto flex items-center gap-2"}>
-          <Button variant="ghost" size="sm" onClick={toggle} className="gap-1.5">
-            <Languages className="h-4 w-4" />
-            <span className="text-xs font-medium uppercase">{locale === "en" ? "FA" : "EN"}</span>
-          </Button>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={toggle}
+            className="flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            aria-label="Toggle language"
+          >
+            <Globe className="size-4" aria-hidden />
+            <span className="font-medium">{locale === "en" ? "EN" : "FA"}</span>
+          </button>
 
           {isAuthenticated ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="gap-2">
-                  <UserCircle2 className="h-5 w-5" />
-                  <span className="hidden sm:inline">{user?.name}</span>
-                  <Badge variant="secondary" className="uppercase text-[10px]">{role}</Badge>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel className="text-xs text-muted-foreground">
-                  {user?.email}
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={signOut} className="gap-2">
-                  <LogOut className="h-4 w-4" />
-                  {t("nav.signOut")}
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <div className="hidden items-center gap-3 md:flex">
+              <span className="flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-xs font-medium text-accent-foreground">
+                <span className="size-1.5 rounded-full bg-primary" aria-hidden />
+                {user?.name}
+              </span>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <LogOut className="size-4" aria-hidden />
+                Log out
+              </button>
+            </div>
           ) : (
-            <Button asChild size="sm" variant="default">
-              <Link to="/auth">{t("nav.signIn")}</Link>
-            </Button>
+            <div className="hidden items-center gap-3 md:flex">
+              <Link to="/auth" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                Log in
+              </Link>
+              <Link
+                to="/auth"
+                className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              >
+                Sign up
+              </Link>
+            </div>
           )}
         </div>
       </div>
