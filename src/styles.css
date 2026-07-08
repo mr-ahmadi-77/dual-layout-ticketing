@@ -62,45 +62,47 @@
 }
 
 :root {
-  /* Ticketing platform — midnight stage with amber ticket-stub warmth */
-  --radius: 0.75rem;
-  --background: oklch(0.16 0.02 265);
-  --foreground: oklch(0.97 0.01 90);
-  --card: oklch(0.20 0.025 265);
-  --card-foreground: oklch(0.97 0.01 90);
-  --popover: oklch(0.20 0.025 265);
-  --popover-foreground: oklch(0.97 0.01 90);
-  --primary: oklch(0.82 0.17 78);
-  --primary-foreground: oklch(0.18 0.03 265);
-  --secondary: oklch(0.26 0.03 265);
-  --secondary-foreground: oklch(0.97 0.01 90);
-  --muted: oklch(0.24 0.02 265);
-  --muted-foreground: oklch(0.68 0.02 260);
-  --accent: oklch(0.62 0.20 25);
-  --accent-foreground: oklch(0.98 0.01 90);
-  --destructive: oklch(0.60 0.22 22);
-  --destructive-foreground: oklch(0.98 0.01 90);
-  --border: oklch(0.28 0.02 265);
-  --input: oklch(0.24 0.02 265);
-  --ring: oklch(0.82 0.17 78);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.18 0.025 265);
-  --sidebar-foreground: oklch(0.92 0.01 90);
-  --sidebar-primary: oklch(0.82 0.17 78);
-  --sidebar-primary-foreground: oklch(0.18 0.03 265);
-  --sidebar-accent: oklch(0.24 0.02 265);
-  --sidebar-accent-foreground: oklch(0.97 0.01 90);
-  --sidebar-border: oklch(0.26 0.02 265);
-  --sidebar-ring: oklch(0.82 0.17 78);
+  color-scheme: light;
+  /* Summit — mountain mist palette: slate #6D8196, steel #B0C4DE, teal #01796F, gray #5A5A5A */
+  --radius: 0.5rem;
+  --background: oklch(0.982 0.003 240);
+  --foreground: oklch(0.28 0.015 240);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.28 0.015 240);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.28 0.015 240);
+  --primary: oklch(0.52 0.09 175);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.82 0.045 250);
+  --secondary-foreground: oklch(0.28 0.015 240);
+  --muted: oklch(0.95 0.007 240);
+  --muted-foreground: oklch(0.52 0.008 240);
+  --accent: oklch(0.93 0.015 240);
+  --accent-foreground: oklch(0.28 0.015 240);
+  --destructive: oklch(0.55 0.17 22);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0.008 240);
+  --input: oklch(0.9 0.008 240);
+  --ring: oklch(0.52 0.09 175);
+  --chart-1: oklch(0.52 0.09 175);
+  --chart-2: oklch(0.58 0.035 245);
+  --chart-3: oklch(0.82 0.045 250);
+  --chart-4: oklch(0.52 0.008 240);
+  --chart-5: oklch(0.28 0.015 240);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.28 0.015 240);
+  --sidebar-primary: oklch(0.52 0.09 175);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.95 0.007 240);
+  --sidebar-accent-foreground: oklch(0.28 0.015 240);
+  --sidebar-border: oklch(0.9 0.008 240);
+  --sidebar-ring: oklch(0.52 0.09 175);
 
-  --gradient-hero: linear-gradient(135deg, oklch(0.20 0.05 285) 0%, oklch(0.18 0.04 265) 55%, oklch(0.26 0.10 45) 100%);
-  --gradient-amber: linear-gradient(135deg, oklch(0.82 0.17 78), oklch(0.72 0.19 45));
-  --shadow-glow: 0 20px 60px -20px oklch(0.82 0.17 78 / 0.35);
-  --shadow-elevated: 0 12px 40px -12px oklch(0 0 0 / 0.6);
+  /* Seat map */
+  --seat-available: oklch(0.82 0.045 250);
+  --seat-locked: oklch(0.58 0.035 245);
+  --seat-booked: oklch(0.9 0.008 240);
+  --seat-selected: oklch(0.52 0.09 175);
 
   --font-sans-en: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-sans-fa: "Vazirmatn", "Inter", ui-sans-serif, system-ui, sans-serif;
