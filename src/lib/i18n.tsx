@@ -6,7 +6,7 @@ export type Direction = "ltr" | "rtl";
 type Dict = Record<string, string>;
 
 const en: Dict = {
-  "brand.name": "Stagepass",
+  "brand.name": "Summit",
   "brand.tagline": "Fair access to live moments",
   "nav.discover": "Discover",
   "nav.dashboard": "Dashboard",
@@ -51,7 +51,7 @@ const en: Dict = {
 };
 
 const fa: Dict = {
-  "brand.name": "استیج‌پس",
+  "brand.name": "سامیت",
   "brand.tagline": "دسترسی عادلانه به لحظه‌های زنده",
   "nav.discover": "کشف رویدادها",
   "nav.dashboard": "داشبورد",
