@@ -80,18 +80,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Stagepass — Fair access to live moments" },
+      { title: "Summit — Event Ticketing Platform" },
       {
         name: "description",
         content:
-          "Stagepass is a distributed event ticketing platform with live seat maps, fair virtual queueing, and instant QR tickets.",
+          "Discover events, pick your seat in real time, and check out securely. Fair, transparent ticketing for fans and organizers.",
       },
-      { name: "author", content: "Stagepass" },
-      { property: "og:title", content: "Stagepass — Event Ticketing" },
+      { name: "author", content: "Summit" },
+      { property: "og:title", content: "Summit — Event Ticketing" },
       {
         property: "og:description",
-        content:
-          "Live seat availability, fair queueing under flash traffic, and instant QR tickets.",
+        content: "Live seat availability. Fair queueing. Instant QR tickets.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

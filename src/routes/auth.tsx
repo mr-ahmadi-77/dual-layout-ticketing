@@ -1,28 +1,23 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Ticket } from "lucide-react";
-import { useI18n } from "@/lib/i18n";
 import { useRbac, type Role } from "@/lib/rbac";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent } from "@/components/ui/card";
+import { SiteFooter } from "@/components/site-footer";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({
-    meta: [
-      { title: "Sign in — Stagepass" },
-      { name: "description", content: "Sign in to Stagepass as a buyer, organizer, or admin." },
-    ],
-  }),
+  head: () => ({ meta: [{ title: "Sign in — Summit" }] }),
   component: AuthPage,
 });
 
 const ROLES: Exclude<Role, "guest">[] = ["buyer", "organizer", "admin"];
+const ROLE_LABEL: Record<Exclude<Role, "guest">, string> = {
+  buyer: "Buyer",
+  organizer: "Organizer",
+  admin: "Admin",
+};
 
 function AuthPage() {
-  const { t, dir } = useI18n();
   const { signIn } = useRbac();
   const navigate = useNavigate();
   const [role, setRole] = useState<Exclude<Role, "guest">>("buyer");
@@ -31,84 +26,75 @@ function AuthPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     signIn(role, email || undefined);
-    const target = role === "buyer" ? "/buyer" : role === "organizer" ? "/organizer" : "/admin";
-    navigate({ to: target });
+    navigate({ to: role === "buyer" ? "/buyer" : role === "organizer" ? "/organizer" : "/admin" });
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] grid lg:grid-cols-2">
-      {/* Left: form */}
-      <div className="flex items-center justify-center p-6 sm:p-12">
-        <Card className="w-full max-w-md border-border/60 bg-card">
-          <CardContent className="p-8">
-            <div className="flex items-center gap-2 mb-6">
-              <span className="grid h-9 w-9 place-items-center rounded-lg bg-amber-gradient shadow-glow">
-                <Ticket className="h-5 w-5 text-primary-foreground" strokeWidth={2.5} />
-              </span>
-              <span className="text-lg font-semibold">{t("brand.name")}</span>
+    <>
+      <div className="mx-auto flex max-w-md flex-col gap-8 px-4 py-16 md:py-24">
+        <div className="flex items-center gap-2 font-semibold tracking-tight">
+          <span className="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+            <Ticket className="size-4" aria-hidden />
+          </span>
+          Summit
+        </div>
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
+          <p className="mt-1 text-sm text-muted-foreground">Sign in to book, organize, or manage events.</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-lg border border-border bg-card p-6">
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="email" className="text-sm font-medium">Email</label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@summit.dev"
+              className="h-10 rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="password" className="text-sm font-medium">Password</label>
+            <input
+              id="password"
+              type="password"
+              placeholder="••••••••"
+              className="h-10 rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+            />
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <span className="text-sm font-medium">Continue as</span>
+            <div className="grid grid-cols-3 gap-2">
+              {ROLES.map((r) => (
+                <button
+                  key={r}
+                  type="button"
+                  onClick={() => setRole(r)}
+                  className={cn(
+                    "rounded-md border px-3 py-2 text-sm transition-colors",
+                    role === r
+                      ? "border-primary bg-accent text-foreground"
+                      : "border-border text-muted-foreground hover:text-foreground",
+                  )}
+                >
+                  {ROLE_LABEL[r]}
+                </button>
+              ))}
             </div>
-            <h1 className="text-2xl font-semibold">{t("auth.title")}</h1>
-            <p className="text-sm text-muted-foreground mt-1">{t("auth.subtitle")}</p>
+          </div>
 
-            <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-              <div className="space-y-2">
-                <Label htmlFor="email">{t("auth.email")}</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@stagepass.com"
-                  className={dir === "rtl" ? "text-right" : ""}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">{t("auth.password")}</Label>
-                <Input id="password" type="password" placeholder="••••••••" />
-              </div>
-
-              <div className="space-y-2">
-                <Label>{t("auth.roleHint")}</Label>
-                <div className="grid grid-cols-3 gap-2">
-                  {ROLES.map((r) => (
-                    <button
-                      key={r}
-                      type="button"
-                      onClick={() => setRole(r)}
-                      className={cn(
-                        "rounded-md border px-3 py-2 text-sm capitalize transition-colors",
-                        role === r
-                          ? "border-primary bg-primary/10 text-primary"
-                          : "border-border text-muted-foreground hover:text-foreground",
-                      )}
-                    >
-                      {t(`auth.role.${r}`)}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <Button type="submit" className="w-full bg-amber-gradient text-primary-foreground hover:opacity-90 shadow-glow">
-                {t("auth.submit")}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+          <button
+            type="submit"
+            className="mt-2 h-10 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+          >
+            Continue
+          </button>
+        </form>
       </div>
-
-      {/* Right: visual */}
-      <div className="hidden lg:block relative bg-hero border-s border-border/60">
-        <div className="absolute inset-0 opacity-40" aria-hidden>
-          <div className="absolute top-20 left-20 h-72 w-72 rounded-full bg-primary/30 blur-3xl" />
-          <div className="absolute bottom-20 right-20 h-72 w-72 rounded-full bg-accent/20 blur-3xl" />
-        </div>
-        <div className="relative h-full flex items-end p-12">
-          <blockquote className="max-w-md">
-            <p className="text-2xl font-medium leading-snug">{t("discover.title")}</p>
-            <p className="mt-3 text-sm text-muted-foreground">{t("discover.subtitle")}</p>
-          </blockquote>
-        </div>
-      </div>
-    </div>
+      <SiteFooter />
+    </>
   );
 }
