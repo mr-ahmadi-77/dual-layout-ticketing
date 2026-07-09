@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EventsIdRouteImport } from './routes/events.$id'
+import { Route as EventsRouteImport } from './routes/events.'
 
 const OrganizerRoute = OrganizerRouteImport.update({
   id: '/organizer',
@@ -46,6 +47,11 @@ const EventsIdRoute = EventsIdRouteImport.update({
   path: '/events/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events/',
+  path: '/events/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/buyer': typeof BuyerRoute
   '/organizer': typeof OrganizerRoute
+  '/events/': typeof EventsRoute
   '/events/$id': typeof EventsIdRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/buyer': typeof BuyerRoute
   '/organizer': typeof OrganizerRoute
+  '/events': typeof EventsRoute
   '/events/$id': typeof EventsIdRoute
 }
 export interface FileRoutesById {
@@ -70,13 +78,28 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/buyer': typeof BuyerRoute
   '/organizer': typeof OrganizerRoute
+  '/events/': typeof EventsRoute
   '/events/$id': typeof EventsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/auth' | '/buyer' | '/organizer' | '/events/$id'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/buyer'
+    | '/organizer'
+    | '/events/'
+    | '/events/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/auth' | '/buyer' | '/organizer' | '/events/$id'
+  to:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/buyer'
+    | '/organizer'
+    | '/events'
+    | '/events/$id'
   id:
     | '__root__'
     | '/'
@@ -84,6 +107,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/buyer'
     | '/organizer'
+    | '/events/'
     | '/events/$id'
   fileRoutesById: FileRoutesById
 }
@@ -93,6 +117,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BuyerRoute: typeof BuyerRoute
   OrganizerRoute: typeof OrganizerRoute
+  EventsRoute: typeof EventsRoute
   EventsIdRoute: typeof EventsIdRoute
 }
 
@@ -140,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/events/': {
+      id: '/events/'
+      path: '/events'
+      fullPath: '/events/'
+      preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -149,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BuyerRoute: BuyerRoute,
   OrganizerRoute: OrganizerRoute,
+  EventsRoute: EventsRoute,
   EventsIdRoute: EventsIdRoute,
 }
 export const routeTree = rootRouteImport

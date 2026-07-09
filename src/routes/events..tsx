@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { getEvent, events } from "@/lib/events-data";
 import { useI18n } from "@/lib/i18n";
 
-export const Route = createFileRoute("/events/$id")({
+export const Route = createFileRoute("/events/")({
   loader: ({ params }) => {
     const event = getEvent(params.id);
     if (!event) throw notFound();
