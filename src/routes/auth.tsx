@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Ticket } from "lucide-react";
 import { useRbac, type Role } from "@/lib/rbac";
+import { useI18n } from "@/lib/i18n";
 import { SiteFooter } from "@/components/site-footer";
 import { cn } from "@/lib/utils";
 
@@ -11,14 +12,10 @@ export const Route = createFileRoute("/auth")({
 });
 
 const ROLES: Exclude<Role, "guest">[] = ["buyer", "organizer", "admin"];
-const ROLE_LABEL: Record<Exclude<Role, "guest">, string> = {
-  buyer: "Buyer",
-  organizer: "Organizer",
-  admin: "Admin",
-};
 
 function AuthPage() {
   const { signIn } = useRbac();
+  const { t } = useI18n();
   const navigate = useNavigate();
   const [role, setRole] = useState<Exclude<Role, "guest">>("buyer");
   const [email, setEmail] = useState("");
@@ -36,27 +33,27 @@ function AuthPage() {
           <span className="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <Ticket className="size-4" aria-hidden />
           </span>
-          Summit
+          {t("brand.name")}
         </div>
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Sign in to book, organize, or manage events.</p>
+          <h1 className="text-2xl font-semibold tracking-tight">{t("auth.title")}</h1>
+          <p className="mt-1 text-sm text-muted-foreground">{t("auth.subtitle")}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-lg border border-border bg-card p-6">
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="email" className="text-sm font-medium">Email</label>
+            <label htmlFor="email" className="text-sm font-medium">{t("auth.email")}</label>
             <input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@summit.dev"
+              placeholder={t("auth.emailPlaceholder")}
               className="h-10 rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="password" className="text-sm font-medium">Password</label>
+            <label htmlFor="password" className="text-sm font-medium">{t("auth.password")}</label>
             <input
               id="password"
               type="password"
@@ -66,7 +63,7 @@ function AuthPage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <span className="text-sm font-medium">Continue as</span>
+            <span className="text-sm font-medium">{t("auth.continueAs")}</span>
             <div className="grid grid-cols-3 gap-2">
               {ROLES.map((r) => (
                 <button
@@ -80,17 +77,14 @@ function AuthPage() {
                       : "border-border text-muted-foreground hover:text-foreground",
                   )}
                 >
-                  {ROLE_LABEL[r]}
+                  {t(`role.${r}`)}
                 </button>
               ))}
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="mt-2 h-10 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
-          >
-            Continue
+          <button type="submit" className="mt-2 h-10 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90">
+            {t("auth.submit")}
           </button>
         </form>
       </div>

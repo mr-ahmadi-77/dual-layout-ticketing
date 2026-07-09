@@ -1,16 +1,17 @@
 import { Link } from "@tanstack/react-router";
 import { CalendarDays, MapPin } from "lucide-react";
 import type { EventItem } from "@/lib/events-data";
+import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
-const availabilityLabel = {
-  high: { text: "Available", className: "bg-accent text-accent-foreground" },
-  limited: { text: "Limited seats", className: "bg-secondary text-secondary-foreground" },
-  "selling-fast": { text: "Selling fast", className: "bg-primary text-primary-foreground" },
+const badgeStyles = {
+  high: "bg-accent text-accent-foreground",
+  limited: "bg-secondary text-secondary-foreground",
+  "selling-fast": "bg-primary text-primary-foreground",
 } as const;
 
 export function EventCard({ event }: { event: EventItem }) {
-  const badge = availabilityLabel[event.availability];
+  const { t } = useI18n();
   return (
     <Link
       to="/events/$id"
@@ -23,12 +24,12 @@ export function EventCard({ event }: { event: EventItem }) {
           alt={event.title}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
         />
-        <span className={cn("absolute left-3 top-3 rounded-full px-2.5 py-1 text-xs font-medium", badge.className)}>
-          {badge.text}
+        <span className={cn("absolute start-3 top-3 rounded-full px-2.5 py-1 text-xs font-medium", badgeStyles[event.availability])}>
+          {t(`avail.${event.availability}`)}
         </span>
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
-        <p className="text-xs font-medium uppercase tracking-wide text-primary">{event.category}</p>
+        <p className="text-xs font-medium uppercase tracking-wide text-primary">{t(`cat.${event.category}`)}</p>
         <h3 className="text-base font-semibold leading-snug text-card-foreground text-pretty">{event.title}</h3>
         <div className="flex flex-col gap-1 text-sm text-muted-foreground">
           <span className="flex items-center gap-1.5">
@@ -40,9 +41,8 @@ export function EventCard({ event }: { event: EventItem }) {
             {event.venue}, {event.city}
           </span>
         </div>
-        <p className="mt-auto pt-2 text-sm">
-          <span className="text-muted-foreground">From </span>
-          <span className="font-semibold text-card-foreground">${event.priceFrom}</span>
+        <p className="mt-1 text-sm font-medium">
+          {t("event.ticketsFrom")} <span className="text-foreground">${event.priceFrom}</span>
         </p>
       </div>
     </Link>

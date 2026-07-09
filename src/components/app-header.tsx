@@ -4,20 +4,21 @@ import { useI18n } from "@/lib/i18n";
 import { useRbac, type Role } from "@/lib/rbac";
 import { cn } from "@/lib/utils";
 
-type NavItem = { to: string; label: string; roles: (Role | "guest")[] };
+type NavItem = { to: string; labelKey: string; roles: (Role | "guest")[] };
 
 const NAV: NavItem[] = [
-  { to: "/", label: "Discover", roles: ["guest", "buyer", "organizer", "admin"] },
-  { to: "/buyer", label: "My tickets", roles: ["buyer"] },
-  { to: "/organizer", label: "Dashboard", roles: ["organizer"] },
-  { to: "/admin", label: "Admin", roles: ["admin"] },
+  { to: "/", labelKey: "nav.discover", roles: ["guest", "buyer", "organizer", "admin"] },
+  { to: "/buyer", labelKey: "nav.myTickets", roles: ["buyer"] },
+  { to: "/organizer", labelKey: "nav.dashboard", roles: ["organizer"] },
+  { to: "/admin", labelKey: "nav.admin", roles: ["admin"] },
 ];
 
 export function AppHeader() {
-  const { locale, toggle } = useI18n();
+  const { locale, toggle, t } = useI18n();
   const { user, role, isAuthenticated, signOut } = useRbac();
   const router = useRouter();
 
+  // Strict RBAC visibility: hide protected paths from users who cannot access them.
   const visible = NAV.filter((item) => item.roles.includes(role));
 
   const handleLogout = () => {
@@ -32,7 +33,7 @@ export function AppHeader() {
           <span className="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <Ticket className="size-4" aria-hidden />
           </span>
-          Summit
+          {t("brand.name")}
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex" aria-label="Main">
@@ -46,7 +47,7 @@ export function AppHeader() {
                 "data-[status=active]:font-medium data-[status=active]:text-foreground",
               )}
             >
-              {item.label}
+              {t(item.labelKey)}
             </Link>
           ))}
         </nav>
@@ -56,7 +57,7 @@ export function AppHeader() {
             type="button"
             onClick={toggle}
             className="flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-            aria-label="Toggle language"
+            aria-label={t("nav.toggleLang")}
           >
             <Globe className="size-4" aria-hidden />
             <span className="font-medium">{locale === "en" ? "EN" : "FA"}</span>
@@ -74,19 +75,19 @@ export function AppHeader() {
                 className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 <LogOut className="size-4" aria-hidden />
-                Log out
+                {t("nav.logout")}
               </button>
             </div>
           ) : (
             <div className="hidden items-center gap-3 md:flex">
               <Link to="/auth" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                Log in
+                {t("nav.login")}
               </Link>
               <Link
                 to="/auth"
                 className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
               >
-                Sign up
+                {t("nav.signup")}
               </Link>
             </div>
           )}
