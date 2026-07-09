@@ -2,9 +2,11 @@ import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { events, categories, cities } from "@/lib/events-data";
 import { EventCard } from "@/components/event-card";
+import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 export function EventBrowser() {
+  const { t } = useI18n();
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<string>("All");
   const [city, setCity] = useState<string>("All");
@@ -23,34 +25,34 @@ export function EventBrowser() {
     <section id="events" className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-1">
-          <h2 className="text-2xl font-semibold tracking-tight text-balance">Browse events</h2>
-          <p className="text-sm text-muted-foreground">Live availability, transparent pricing, no surprises at checkout.</p>
+          <h2 className="text-2xl font-semibold tracking-tight text-balance">{t("browse.title")}</h2>
+          <p className="text-sm text-muted-foreground">{t("browse.subtitle")}</p>
         </div>
 
         <div className="flex flex-col gap-3 md:flex-row md:items-center">
           <div className="relative flex-1">
-            <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
+            <Search className="pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
             <input
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search events, venues, or cities"
-              aria-label="Search events"
-              className="h-10 w-full rounded-md border border-input bg-card pl-9 pr-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              placeholder={t("browse.search")}
+              aria-label={t("browse.search")}
+              className="h-10 w-full rounded-md border border-input bg-card ps-9 pe-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
           <select
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            aria-label="Filter by city"
+            aria-label={t("browse.filterCity")}
             className="h-10 rounded-md border border-input bg-card px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           >
-            <option value="All">All cities</option>
+            <option value="All">{t("browse.allCities")}</option>
             {cities.map((c) => <option key={c} value={c}>{c}</option>)}
           </select>
         </div>
 
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+        <div className="flex flex-wrap gap-2" role="group" aria-label={t("browse.filterCategory")}>
           {["All", ...categories].map((c) => (
             <button
               key={c}
@@ -63,7 +65,7 @@ export function EventBrowser() {
                   : "border-border bg-card text-muted-foreground hover:border-secondary hover:text-foreground",
               )}
             >
-              {c}
+              {c === "All" ? t("browse.all") : t(`cat.${c}`)}
             </button>
           ))}
         </div>
@@ -74,8 +76,8 @@ export function EventBrowser() {
           </div>
         ) : (
           <div className="rounded-lg border border-dashed border-border bg-card px-6 py-16 text-center">
-            <p className="font-medium">No events found</p>
-            <p className="mt-1 text-sm text-muted-foreground">Try a different search or clear the filters.</p>
+            <p className="font-medium">{t("browse.empty.title")}</p>
+            <p className="mt-1 text-sm text-muted-foreground">{t("browse.empty.subtitle")}</p>
           </div>
         )}
       </div>
