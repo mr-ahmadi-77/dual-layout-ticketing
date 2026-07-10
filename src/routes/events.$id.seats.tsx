@@ -246,7 +246,16 @@ function SeatsPage() {
             <button
               type="button"
               disabled={selected.length === 0}
-              onClick={() => navigate({ to: "/buyer" })}
+              onClick={() =>
+                navigate({
+                  to: "/checkout",
+                  search: {
+                    eventId: event.id,
+                    seats: selected.map((s) => s.id).join(","),
+                    total: subtotal,
+                  },
+                })
+              }
               className="mt-4 h-11 w-full rounded-md bg-primary text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
             >
               {t("seats.checkout")}
