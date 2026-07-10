@@ -147,6 +147,13 @@ const en: Dict = {
   "seats.releasedBody": "Seats were returned to availability. Please choose again.",
   "seats.min": "min",
   "seats.sec": "sec",
+  // Checkout
+  "checkout.title": "Order confirmed",
+  "checkout.subtitle": "Your tickets are ready. A copy has been sent to your email.",
+  "checkout.seats": "Seats",
+  "checkout.total": "Total paid",
+  "checkout.viewTickets": "View my tickets",
+  "checkout.browseMore": "Browse more events",
 };
 
 const fa: Dict = {
@@ -278,6 +285,12 @@ const fa: Dict = {
   "seats.releasedBody": "صندلی‌ها به لیست موجودی بازگشتند. لطفاً دوباره انتخاب کنید.",
   "seats.min": "دقیقه",
   "seats.sec": "ثانیه",
+  "checkout.title": "سفارش شما ثبت شد",
+  "checkout.subtitle": "بلیت‌های شما آماده است. یک نسخه به ایمیل شما ارسال شد.",
+  "checkout.seats": "صندلی‌ها",
+  "checkout.total": "مبلغ پرداختی",
+  "checkout.viewTickets": "مشاهده بلیت‌های من",
+  "checkout.browseMore": "مرور رویدادهای بیشتر",
 };
 
 const dictionaries: Record<Locale, Dict> = { en, fa };
