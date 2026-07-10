@@ -73,7 +73,7 @@ function CheckoutPage() {
               {seatList.length === 0 ? (
                 <li className="text-sm text-muted-foreground">—</li>
               ) : (
-                seatList.map((id) => (
+                seatList.map((id: string) => (
                   <li key={id} className="rounded-md border border-border bg-background px-2.5 py-1 font-mono text-xs">{id}</li>
                 ))
               )}

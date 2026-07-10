@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OrganizerRouteImport } from './routes/organizer'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as BuyerRouteImport } from './routes/buyer'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -20,6 +21,11 @@ import { Route as EventsIdSeatsRouteImport } from './routes/events.$id.seats'
 const OrganizerRoute = OrganizerRouteImport.update({
   id: '/organizer',
   path: '/organizer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BuyerRoute = BuyerRouteImport.update({
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/buyer': typeof BuyerRoute
+  '/checkout': typeof CheckoutRoute
   '/organizer': typeof OrganizerRoute
   '/events/$id': typeof EventsIdRouteWithChildren
   '/events/$id/seats': typeof EventsIdSeatsRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/buyer': typeof BuyerRoute
+  '/checkout': typeof CheckoutRoute
   '/organizer': typeof OrganizerRoute
   '/events/$id': typeof EventsIdRouteWithChildren
   '/events/$id/seats': typeof EventsIdSeatsRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/buyer': typeof BuyerRoute
+  '/checkout': typeof CheckoutRoute
   '/organizer': typeof OrganizerRoute
   '/events/$id': typeof EventsIdRouteWithChildren
   '/events/$id/seats': typeof EventsIdSeatsRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/buyer'
+    | '/checkout'
     | '/organizer'
     | '/events/$id'
     | '/events/$id/seats'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/buyer'
+    | '/checkout'
     | '/organizer'
     | '/events/$id'
     | '/events/$id/seats'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/buyer'
+    | '/checkout'
     | '/organizer'
     | '/events/$id'
     | '/events/$id/seats'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   BuyerRoute: typeof BuyerRoute
+  CheckoutRoute: typeof CheckoutRoute
   OrganizerRoute: typeof OrganizerRoute
   EventsIdRoute: typeof EventsIdRouteWithChildren
 }
@@ -127,6 +140,13 @@ declare module '@tanstack/react-router' {
       path: '/organizer'
       fullPath: '/organizer'
       preLoaderRoute: typeof OrganizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/buyer': {
@@ -191,6 +211,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   BuyerRoute: BuyerRoute,
+  CheckoutRoute: CheckoutRoute,
   OrganizerRoute: OrganizerRoute,
   EventsIdRoute: EventsIdRouteWithChildren,
 }
