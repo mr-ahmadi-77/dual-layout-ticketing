@@ -154,6 +154,26 @@ const en: Dict = {
   "checkout.total": "Total paid",
   "checkout.viewTickets": "View my tickets",
   "checkout.browseMore": "Browse more events",
+  // Payment
+  "payment.title": "Secure checkout",
+  "payment.subtitle": "Enter your card details to complete your purchase. Your seats are held while you pay.",
+  "payment.summary": "Order summary",
+  "payment.seats": "Seats",
+  "payment.total": "Total due",
+  "payment.cardholder": "Cardholder name",
+  "payment.cardholderPh": "Name on card",
+  "payment.cardNumber": "Card number",
+  "payment.cardNumberPh": "1234 5678 9012 3456",
+  "payment.expiry": "Expiry",
+  "payment.expiryPh": "MM/YY",
+  "payment.cvc": "CVC",
+  "payment.cvcPh": "123",
+  "payment.email": "Email for receipt",
+  "payment.emailPh": "you@example.com",
+  "payment.pay": "Pay",
+  "payment.processing": "Processing…",
+  "payment.back": "Back to seats",
+  "payment.secured": "Secured with 256-bit encryption. This is a demo — no real charge is made.",
 };
 
 const fa: Dict = {
