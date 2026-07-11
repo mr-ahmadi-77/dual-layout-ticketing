@@ -248,7 +248,7 @@ function SeatsPage() {
               disabled={selected.length === 0}
               onClick={() =>
                 navigate({
-                  to: "/checkout",
+                  to: "/payment",
                   search: {
                     eventId: event.id,
                     seats: selected.map((s) => s.id).join(","),

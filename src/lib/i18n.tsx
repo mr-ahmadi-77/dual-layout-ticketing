@@ -154,6 +154,26 @@ const en: Dict = {
   "checkout.total": "Total paid",
   "checkout.viewTickets": "View my tickets",
   "checkout.browseMore": "Browse more events",
+  // Payment
+  "payment.title": "Secure checkout",
+  "payment.subtitle": "Enter your card details to complete your purchase. Your seats are held while you pay.",
+  "payment.summary": "Order summary",
+  "payment.seats": "Seats",
+  "payment.total": "Total due",
+  "payment.cardholder": "Cardholder name",
+  "payment.cardholderPh": "Name on card",
+  "payment.cardNumber": "Card number",
+  "payment.cardNumberPh": "1234 5678 9012 3456",
+  "payment.expiry": "Expiry",
+  "payment.expiryPh": "MM/YY",
+  "payment.cvc": "CVC",
+  "payment.cvcPh": "123",
+  "payment.email": "Email for receipt",
+  "payment.emailPh": "you@example.com",
+  "payment.pay": "Pay",
+  "payment.processing": "Processing…",
+  "payment.back": "Back to seats",
+  "payment.secured": "Secured with 256-bit encryption. This is a demo — no real charge is made.",
 };
 
 const fa: Dict = {
@@ -291,6 +311,26 @@ const fa: Dict = {
   "checkout.total": "مبلغ پرداختی",
   "checkout.viewTickets": "مشاهده بلیت‌های من",
   "checkout.browseMore": "مرور رویدادهای بیشتر",
+  // Payment
+  "payment.title": "پرداخت امن",
+  "payment.subtitle": "برای تکمیل خرید، اطلاعات کارت خود را وارد کنید. صندلی‌های شما در طول پرداخت نگه داشته می‌شوند.",
+  "payment.summary": "خلاصه سفارش",
+  "payment.seats": "صندلی‌ها",
+  "payment.total": "مبلغ قابل پرداخت",
+  "payment.cardholder": "نام دارنده کارت",
+  "payment.cardholderPh": "نام روی کارت",
+  "payment.cardNumber": "شماره کارت",
+  "payment.cardNumberPh": "۱۲۳۴ ۵۶۷۸ ۹۰۱۲ ۳۴۵۶",
+  "payment.expiry": "تاریخ انقضا",
+  "payment.expiryPh": "MM/YY",
+  "payment.cvc": "CVC",
+  "payment.cvcPh": "۱۲۳",
+  "payment.email": "ایمیل برای رسید",
+  "payment.emailPh": "you@example.com",
+  "payment.pay": "پرداخت",
+  "payment.processing": "در حال پردازش…",
+  "payment.back": "بازگشت به صندلی‌ها",
+  "payment.secured": "با رمزنگاری ۲۵۶ بیتی ایمن شده است. این یک نسخه نمایشی است — هیچ مبلغی واقعاً کسر نمی‌شود.",
 };
 
 const dictionaries: Record<Locale, Dict> = { en, fa };
