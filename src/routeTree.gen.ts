@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as OrganizerRouteImport } from './routes/organizer'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as BuyerRouteImport } from './routes/buyer'
@@ -19,6 +20,11 @@ import { Route as EventsIdRouteImport } from './routes/events.$id'
 import { Route as EventsIdIndexRouteImport } from './routes/events.$id.index'
 import { Route as EventsIdSeatsRouteImport } from './routes/events.$id.seats'
 
+const PaymentRoute = PaymentRouteImport.update({
+  id: '/payment',
+  path: '/payment',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OrganizerRoute = OrganizerRouteImport.update({
   id: '/organizer',
   path: '/organizer',
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/buyer': typeof BuyerRoute
   '/checkout': typeof CheckoutRoute
   '/organizer': typeof OrganizerRoute
+  '/payment': typeof PaymentRoute
   '/events/$id': typeof EventsIdRouteWithChildren
   '/events/$id/seats': typeof EventsIdSeatsRoute
   '/events/$id/': typeof EventsIdIndexRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/buyer': typeof BuyerRoute
   '/checkout': typeof CheckoutRoute
   '/organizer': typeof OrganizerRoute
+  '/payment': typeof PaymentRoute
   '/events/$id/seats': typeof EventsIdSeatsRoute
   '/events/$id': typeof EventsIdIndexRoute
 }
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/buyer': typeof BuyerRoute
   '/checkout': typeof CheckoutRoute
   '/organizer': typeof OrganizerRoute
+  '/payment': typeof PaymentRoute
   '/events/$id': typeof EventsIdRouteWithChildren
   '/events/$id/seats': typeof EventsIdSeatsRoute
   '/events/$id/': typeof EventsIdIndexRoute
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/buyer'
     | '/checkout'
     | '/organizer'
+    | '/payment'
     | '/events/$id'
     | '/events/$id/seats'
     | '/events/$id/'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/buyer'
     | '/checkout'
     | '/organizer'
+    | '/payment'
     | '/events/$id/seats'
     | '/events/$id'
   id:
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/buyer'
     | '/checkout'
     | '/organizer'
+    | '/payment'
     | '/events/$id'
     | '/events/$id/seats'
     | '/events/$id/'
@@ -140,11 +152,19 @@ export interface RootRouteChildren {
   BuyerRoute: typeof BuyerRoute
   CheckoutRoute: typeof CheckoutRoute
   OrganizerRoute: typeof OrganizerRoute
+  PaymentRoute: typeof PaymentRoute
   EventsIdRoute: typeof EventsIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/payment': {
+      id: '/payment'
+      path: '/payment'
+      fullPath: '/payment'
+      preLoaderRoute: typeof PaymentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/organizer': {
       id: '/organizer'
       path: '/organizer'
@@ -232,6 +252,7 @@ const rootRouteChildren: RootRouteChildren = {
   BuyerRoute: BuyerRoute,
   CheckoutRoute: CheckoutRoute,
   OrganizerRoute: OrganizerRoute,
+  PaymentRoute: PaymentRoute,
   EventsIdRoute: EventsIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport

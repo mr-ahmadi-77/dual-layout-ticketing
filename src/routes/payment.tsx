@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState, type FormEvent } from "@/lib/react-shim";
+import { useState, type FormEvent } from "react";
 import { ArrowLeft, Lock, CreditCard, CalendarDays, MapPin } from "lucide-react";
 import { z } from "zod";
 import { SiteFooter } from "@/components/site-footer";
@@ -173,7 +173,7 @@ function PaymentPage() {
             <div className="mt-4 border-t border-border pt-4">
               <p className="text-xs font-medium text-muted-foreground">{t("payment.seats")}</p>
               <ul className="mt-2 flex flex-wrap gap-1.5">
-                {seatList.map((id) => (
+                {seatList.map((id: string) => (
                   <li key={id} className="rounded-md border border-border bg-background px-2 py-0.5 font-mono text-[11px]">{id}</li>
                 ))}
               </ul>
