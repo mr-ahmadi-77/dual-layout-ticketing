@@ -311,6 +311,26 @@ const fa: Dict = {
   "checkout.total": "مبلغ پرداختی",
   "checkout.viewTickets": "مشاهده بلیت‌های من",
   "checkout.browseMore": "مرور رویدادهای بیشتر",
+  // Payment
+  "payment.title": "پرداخت امن",
+  "payment.subtitle": "برای تکمیل خرید، اطلاعات کارت خود را وارد کنید. صندلی‌های شما در طول پرداخت نگه داشته می‌شوند.",
+  "payment.summary": "خلاصه سفارش",
+  "payment.seats": "صندلی‌ها",
+  "payment.total": "مبلغ قابل پرداخت",
+  "payment.cardholder": "نام دارنده کارت",
+  "payment.cardholderPh": "نام روی کارت",
+  "payment.cardNumber": "شماره کارت",
+  "payment.cardNumberPh": "۱۲۳۴ ۵۶۷۸ ۹۰۱۲ ۳۴۵۶",
+  "payment.expiry": "تاریخ انقضا",
+  "payment.expiryPh": "MM/YY",
+  "payment.cvc": "CVC",
+  "payment.cvcPh": "۱۲۳",
+  "payment.email": "ایمیل برای رسید",
+  "payment.emailPh": "you@example.com",
+  "payment.pay": "پرداخت",
+  "payment.processing": "در حال پردازش…",
+  "payment.back": "بازگشت به صندلی‌ها",
+  "payment.secured": "با رمزنگاری ۲۵۶ بیتی ایمن شده است. این یک نسخه نمایشی است — هیچ مبلغی واقعاً کسر نمی‌شود.",
 };
 
 const dictionaries: Record<Locale, Dict> = { en, fa };
