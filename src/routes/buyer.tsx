@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { CalendarDays, MapPin, QrCode } from "lucide-react";
 import { RoleGate } from "@/components/role-gate";
 import { SiteFooter } from "@/components/site-footer";
+import { QrTicket } from "@/components/qr-ticket";
 import { events } from "@/lib/events-data";
 import { useI18n } from "@/lib/i18n";
 
@@ -26,6 +27,9 @@ function BuyerPage() {
             <div key={event.id} className="flex flex-col overflow-hidden rounded-lg border border-border bg-card">
               <div className="relative aspect-[3/2]">
                 <img src={event.image} alt={event.title} className="absolute inset-0 h-full w-full object-cover" />
+                <div className="absolute bottom-3 right-3">
+                  <QrTicket size={72} value={`summit:ticket:${event.id}`} />
+                </div>
               </div>
               <div className="flex flex-1 flex-col gap-2 p-4">
                 <p className="text-xs font-medium uppercase tracking-wide text-primary">{t(`cat.${event.category}`)}</p>
