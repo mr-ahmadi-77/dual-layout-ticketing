@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Armchair, DollarSign, Ticket, TrendingUp } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Armchair, DollarSign, Plus, Ticket, TrendingUp } from "lucide-react";
 import { RoleGate } from "@/components/role-gate";
 import { SiteFooter } from "@/components/site-footer";
 import { recentOrders } from "@/lib/events-data";
@@ -33,10 +33,19 @@ function OrganizerPage() {
             <h1 className="text-2xl font-semibold tracking-tight">{t("org.title")}</h1>
             <p className="mt-1 text-sm text-muted-foreground">{t("org.subtitle")}</p>
           </div>
-          <span className="flex w-fit items-center gap-2 rounded-full bg-accent px-3 py-1.5 text-xs font-medium text-accent-foreground">
-            <span className="size-2 rounded-full bg-primary animate-pulse" aria-hidden />
-            {t("org.live")}
-          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="flex w-fit items-center gap-2 rounded-full bg-accent px-3 py-1.5 text-xs font-medium text-accent-foreground">
+              <span className="size-2 rounded-full bg-primary animate-pulse" aria-hidden />
+              {t("org.live")}
+            </span>
+            <Link
+              to="/create-event"
+              className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              <Plus className="size-3.5" aria-hidden />
+              {t("org.createEvent")}
+            </Link>
+          </div>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

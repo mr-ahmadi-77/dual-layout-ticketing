@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as OrganizerRouteImport } from './routes/organizer'
+import { Route as CreateEventRouteImport } from './routes/create-event'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as BuyerRouteImport } from './routes/buyer'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -28,6 +29,11 @@ const PaymentRoute = PaymentRouteImport.update({
 const OrganizerRoute = OrganizerRouteImport.update({
   id: '/organizer',
   path: '/organizer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreateEventRoute = CreateEventRouteImport.update({
+  id: '/create-event',
+  path: '/create-event',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/buyer': typeof BuyerRoute
   '/checkout': typeof CheckoutRoute
+  '/create-event': typeof CreateEventRoute
   '/organizer': typeof OrganizerRoute
   '/payment': typeof PaymentRoute
   '/events/$id': typeof EventsIdRouteWithChildren
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/buyer': typeof BuyerRoute
   '/checkout': typeof CheckoutRoute
+  '/create-event': typeof CreateEventRoute
   '/organizer': typeof OrganizerRoute
   '/payment': typeof PaymentRoute
   '/events/$id/seats': typeof EventsIdSeatsRoute
@@ -101,6 +109,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/buyer': typeof BuyerRoute
   '/checkout': typeof CheckoutRoute
+  '/create-event': typeof CreateEventRoute
   '/organizer': typeof OrganizerRoute
   '/payment': typeof PaymentRoute
   '/events/$id': typeof EventsIdRouteWithChildren
@@ -115,6 +124,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/buyer'
     | '/checkout'
+    | '/create-event'
     | '/organizer'
     | '/payment'
     | '/events/$id'
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/buyer'
     | '/checkout'
+    | '/create-event'
     | '/organizer'
     | '/payment'
     | '/events/$id/seats'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/buyer'
     | '/checkout'
+    | '/create-event'
     | '/organizer'
     | '/payment'
     | '/events/$id'
@@ -151,6 +163,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BuyerRoute: typeof BuyerRoute
   CheckoutRoute: typeof CheckoutRoute
+  CreateEventRoute: typeof CreateEventRoute
   OrganizerRoute: typeof OrganizerRoute
   PaymentRoute: typeof PaymentRoute
   EventsIdRoute: typeof EventsIdRouteWithChildren
@@ -170,6 +183,13 @@ declare module '@tanstack/react-router' {
       path: '/organizer'
       fullPath: '/organizer'
       preLoaderRoute: typeof OrganizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/create-event': {
+      id: '/create-event'
+      path: '/create-event'
+      fullPath: '/create-event'
+      preLoaderRoute: typeof CreateEventRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -251,6 +271,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BuyerRoute: BuyerRoute,
   CheckoutRoute: CheckoutRoute,
+  CreateEventRoute: CreateEventRoute,
   OrganizerRoute: OrganizerRoute,
   PaymentRoute: PaymentRoute,
   EventsIdRoute: EventsIdRouteWithChildren,
