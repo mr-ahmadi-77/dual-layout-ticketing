@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CheckCircle2, CalendarDays, MapPin, QrCode, Ticket } from "lucide-react";
+import { CheckCircle2, CalendarDays, MapPin, Ticket } from "lucide-react";
 import { z } from "zod";
 import { SiteFooter } from "@/components/site-footer";
+import { QrTicket } from "@/components/qr-ticket";
 import { getEvent } from "@/lib/events-data";
 import { useI18n } from "@/lib/i18n";
 
@@ -62,9 +63,10 @@ function CheckoutPage() {
                 <span className="flex items-center gap-1.5"><MapPin className="size-4" />{event.venue}, {event.city}</span>
               </div>
             </div>
-            <div className="flex size-28 shrink-0 items-center justify-center rounded-md border border-border bg-background">
-              <QrCode className="size-16 text-foreground" aria-hidden />
-            </div>
+            <QrTicket
+              size={128}
+              value={JSON.stringify({ orderId, eventId, seats: seatList, total })}
+            />
           </div>
 
           <div className="border-t border-border p-6">
