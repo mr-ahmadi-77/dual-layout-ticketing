@@ -80,14 +80,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Summit — Event Ticketing Platform" },
+      { title: "Eventra — Smart Event Ticketing & Reservation Platform" },
       {
         name: "description",
         content:
           "Discover events, pick your seat in real time, and check out securely. Fair, transparent ticketing for fans and organizers.",
       },
-      { name: "author", content: "Summit" },
-      { property: "og:title", content: "Summit — Event Ticketing" },
+      { name: "author", content: "Eventra" },
+      { property: "og:title", content: "Eventra — Smart Event Ticketing" },
       {
         property: "og:description",
         content: "Live seat availability. Fair queueing. Instant QR tickets.",

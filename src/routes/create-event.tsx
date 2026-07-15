@@ -7,7 +7,7 @@ import { categories, cities } from "@/lib/events-data";
 import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/create-event")({
-  head: () => ({ meta: [{ title: "Create event — Summit" }] }),
+  head: () => ({ meta: [{ title: "Create event — Eventra" }] }),
   component: CreateEventPage,
 });
 

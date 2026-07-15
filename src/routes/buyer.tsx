@@ -7,7 +7,7 @@ import { events } from "@/lib/events-data";
 import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/buyer")({
-  head: () => ({ meta: [{ title: "My tickets — Summit" }] }),
+  head: () => ({ meta: [{ title: "My tickets — Eventra" }] }),
   component: BuyerPage,
 });
 

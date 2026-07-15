@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({ meta: [{ title: "Sign in — Summit" }] }),
+  head: () => ({ meta: [{ title: "Sign in — Eventra" }] }),
   component: AuthPage,
 });
 
