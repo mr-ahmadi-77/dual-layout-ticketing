@@ -63,7 +63,7 @@
 
 :root {
   color-scheme: light;
-  /* Summit — mountain mist palette: slate #6D8196, steel #B0C4DE, teal #01796F, gray #5A5A5A */
+  /* Eventra — mountain mist palette: slate #6D8196, steel #B0C4DE, teal #01796F, gray #5A5A5A */
   --radius: 0.5rem;
   --background: oklch(0.982 0.003 240);
   --foreground: oklch(0.28 0.015 240);

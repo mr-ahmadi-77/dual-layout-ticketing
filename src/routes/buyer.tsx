@@ -28,7 +28,7 @@ function BuyerPage() {
               <div className="relative aspect-[3/2]">
                 <img src={event.image} alt={event.title} className="absolute inset-0 h-full w-full object-cover" />
                 <div className="absolute bottom-3 right-3">
-                  <QrTicket size={72} value={`summit:ticket:${event.id}`} />
+                  <QrTicket size={72} value={`eventra:ticket:${event.id}`} />
                 </div>
               </div>
               <div className="flex flex-1 flex-col gap-2 p-4">
