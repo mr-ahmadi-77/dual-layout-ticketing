@@ -1,5 +1,6 @@
 import { Link, useRouter } from "@tanstack/react-router";
-import { Globe, LogOut, Ticket } from "lucide-react";
+import { Globe, LogOut } from "lucide-react";
+import { BrandMark } from "@/components/brand-mark";
 import { useI18n } from "@/lib/i18n";
 import { useRbac, type Role } from "@/lib/rbac";
 import { cn } from "@/lib/utils";
@@ -29,11 +30,9 @@ export function AppHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-sm">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:px-6">
-        <Link to="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span className="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
-            <Ticket className="size-4" aria-hidden />
-          </span>
-          {t("brand.name")}
+        <Link to="/" className="flex items-center gap-2 font-semibold tracking-tight" aria-label={t("brand.name")}>
+          <BrandMark className="size-7" />
+          <span className="text-[15px] font-semibold tracking-tight">{t("brand.name")}</span>
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex" aria-label="Main">
