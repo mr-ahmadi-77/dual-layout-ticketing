@@ -197,6 +197,10 @@ const en: Dict = {
   "payment.processing": "Processing…",
   "payment.back": "Back to seats",
   "payment.secured": "Secured with 256-bit encryption. This is a demo — no real charge is made.",
+  "payment.holdTimer": "Seats held for",
+  "payment.expiredTitle": "Your seat hold expired",
+  "payment.expiredBody": "Seats have been released. Please select seats again to continue.",
+  "payment.chooseSeats": "Choose seats again",
 };
 
 const fa: Dict = {
@@ -377,6 +381,10 @@ const fa: Dict = {
   "payment.processing": "در حال پردازش…",
   "payment.back": "بازگشت به صندلی‌ها",
   "payment.secured": "با رمزنگاری ۲۵۶ بیتی ایمن شده است. این یک نسخه نمایشی است — هیچ مبلغی واقعاً کسر نمی‌شود.",
+  "payment.holdTimer": "زمان نگه‌داشتن صندلی",
+  "payment.expiredTitle": "زمان نگه‌داشتن صندلی به پایان رسید",
+  "payment.expiredBody": "صندلی‌ها آزاد شدند. لطفاً برای ادامه دوباره صندلی انتخاب کنید.",
+  "payment.chooseSeats": "انتخاب مجدد صندلی",
 };
 
 const dictionaries: Record<Locale, Dict> = { en, fa };
