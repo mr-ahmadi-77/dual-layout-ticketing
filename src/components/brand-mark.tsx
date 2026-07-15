@@ -12,8 +12,8 @@ export function BrandMark({ className, title = "Eventra" }: Props) {
     <span
       className={cn(
         "relative inline-flex items-center justify-center overflow-hidden rounded-lg",
-        "bg-[linear-gradient(135deg,hsl(var(--primary))_0%,hsl(var(--primary)/0.75)_100%)]",
-        "text-primary-foreground shadow-sm ring-1 ring-primary/20",
+        "bg-primary text-primary-foreground shadow-sm ring-1 ring-primary/30",
+        "bg-[linear-gradient(135deg,var(--primary)_0%,color-mix(in_oklab,var(--primary)_75%,black)_100%)]",
         className,
       )}
       aria-hidden
