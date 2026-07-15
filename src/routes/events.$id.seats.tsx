@@ -78,6 +78,7 @@ function SeatsPage() {
 
   const selected = useMemo(() => seats.filter((s) => s.state === "selected"), [seats]);
   const subtotal = selected.reduce((sum, s) => sum + s.price, 0);
+  const holdUntil = holdRemaining !== null ? Date.now() + holdRemaining * 1000 : 0;
 
   // Simulate other buyers locking/releasing seats live
   useEffect(() => {
@@ -253,6 +254,7 @@ function SeatsPage() {
                     eventId: event.id,
                     seats: selected.map((s) => s.id).join(","),
                     total: subtotal,
+                    holdUntil,
                   },
                 })
               }
