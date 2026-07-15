@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
-import { ArrowLeft, Lock, CreditCard, CalendarDays, MapPin } from "lucide-react";
+import { useEffect, useState, type FormEvent } from "react";
+import { ArrowLeft, Lock, CreditCard, CalendarDays, MapPin, Timer, AlertCircle } from "lucide-react";
 import { z } from "zod";
 import { SiteFooter } from "@/components/site-footer";
 import { getEvent } from "@/lib/events-data";
@@ -10,6 +10,7 @@ const searchSchema = z.object({
   eventId: z.string(),
   seats: z.string().default(""),
   total: z.coerce.number().default(0),
+  holdUntil: z.coerce.number().default(0),
 });
 
 export const Route = createFileRoute("/payment")({
@@ -24,11 +25,21 @@ export const Route = createFileRoute("/payment")({
 });
 
 function PaymentPage() {
-  const { eventId, seats, total } = Route.useSearch();
+  const { eventId, seats, total, holdUntil } = Route.useSearch();
   const { t } = useI18n();
   const navigate = useNavigate();
   const event = getEvent(eventId);
   const seatList = seats ? seats.split(",").filter(Boolean) : [];
+
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(id);
+  }, []);
+  const remaining = holdUntil > 0 ? Math.max(0, Math.floor((holdUntil - now) / 1000)) : 0;
+  const expired = holdUntil > 0 && remaining <= 0;
+  const mm = Math.floor(remaining / 60);
+  const ss = remaining % 60;
 
   const [name, setName] = useState("");
   const [card, setCard] = useState("");
@@ -48,7 +59,7 @@ function PaymentPage() {
     );
   }
 
-  const canSubmit = name.trim() && card.replace(/\s/g, "").length >= 12 && expiry.length >= 4 && cvc.length >= 3 && email.includes("@");
+  const canSubmit = !expired && name.trim() && card.replace(/\s/g, "").length >= 12 && expiry.length >= 4 && cvc.length >= 3 && email.includes("@");
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -77,12 +88,40 @@ function PaymentPage() {
           >
             <ArrowLeft className="size-4 rtl:rotate-180" aria-hidden /> {t("payment.back")}
           </Link>
-          <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">{t("payment.title")}</h1>
-          <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{t("payment.subtitle")}</p>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">{t("payment.title")}</h1>
+              <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{t("payment.subtitle")}</p>
+            </div>
+            {holdUntil > 0 && !expired && (
+              <div className="flex items-center gap-2 rounded-full border border-primary/30 bg-accent px-3 py-1.5 text-sm font-medium text-primary">
+                <Timer className="size-4" aria-hidden />
+                <span className="tabular-nums">
+                  {t("payment.holdTimer")}: {mm}:{ss.toString().padStart(2, "0")}
+                </span>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-5xl px-4 py-8 md:px-6 md:py-10">
+        {expired && (
+          <div className="mb-6 flex items-start gap-3 rounded-lg border border-destructive/40 bg-destructive/10 p-4 text-sm">
+            <AlertCircle className="mt-0.5 size-4 text-destructive" aria-hidden />
+            <div className="flex-1">
+              <p className="font-medium text-destructive">{t("payment.expiredTitle")}</p>
+              <p className="mt-0.5 text-muted-foreground">{t("payment.expiredBody")}</p>
+            </div>
+            <Link
+              to="/events/$id/seats"
+              params={{ id: event.id }}
+              className="rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground"
+            >
+              {t("payment.chooseSeats")}
+            </Link>
+          </div>
+        )}
         <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
           <form onSubmit={onSubmit} className="rounded-lg border border-border bg-card p-6">
             <div className="mb-5 flex items-center gap-2 text-sm font-medium">
