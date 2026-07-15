@@ -10,9 +10,9 @@ const featured = events.find((e) => e.featured) ?? events[0];
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Summit — Event Ticketing Platform" },
+      { title: "Eventra — Smart Event Ticketing & Reservation Platform" },
       { name: "description", content: "Discover events, pick your seat in real time, and check out securely." },
-      { property: "og:title", content: "Summit — Event Ticketing Platform" },
+      { property: "og:title", content: "Eventra — Smart Event Ticketing & Reservation Platform" },
       { property: "og:description", content: "Live seat availability. Fair queueing. Instant QR tickets." },
     ],
   }),

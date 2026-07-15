@@ -7,7 +7,7 @@ type Dict = Record<string, string>;
 
 const en: Dict = {
   // Brand / footer
-  "brand.name": "Summit",
+  "brand.name": "Eventra",
   "brand.tagline": "Fair, transparent ticketing for fans and organizers. Live seat availability with no surprises at checkout.",
   "footer.discover": "Discover",
   "footer.account": "Account",
@@ -15,7 +15,7 @@ const en: Dict = {
   "footer.myTickets": "My tickets",
   "footer.signIn": "Sign in",
   "footer.forOrganizers": "For organizers",
-  "footer.copyright": "© 2026 Summit Ticketing",
+  "footer.copyright": "© 2026 Eventra",
   "footer.status": "All systems normal",
   // Nav
   "nav.discover": "Discover",
@@ -29,7 +29,7 @@ const en: Dict = {
   // Home hero
   "home.eyebrow": "Fair ticketing, in real time",
   "home.title": "Every seat, live. Every ticket, guaranteed.",
-  "home.subtitle": "Summit shows you exactly which seats are open the moment they open. Pick your seat, hold it for ten minutes, and check out without racing anyone.",
+  "home.subtitle": "Eventra shows you exactly which seats are open the moment they open. Pick your seat, hold it for ten minutes, and check out without racing anyone.",
   "home.cta.find": "Find your event",
   "home.cta.organizers": "For organizers",
   "home.featured": "Featured",
@@ -140,7 +140,7 @@ const en: Dict = {
   "auth.password": "Password",
   "auth.continueAs": "Continue as",
   "auth.submit": "Continue",
-  "auth.emailPlaceholder": "you@summit.dev",
+  "auth.emailPlaceholder": "you@eventra.app",
   "role.buyer": "Buyer",
   "role.organizer": "Organizer",
   "role.admin": "Admin",
@@ -204,7 +204,7 @@ const en: Dict = {
 };
 
 const fa: Dict = {
-  "brand.name": "سامیت",
+  "brand.name": "اونترا",
   "brand.tagline": "بلیت‌فروشی منصفانه و شفاف برای هواداران و برگزارکنندگان. موجودی صندلی به‌صورت زنده و بدون سورپرایز در پرداخت.",
   "footer.discover": "کشف",
   "footer.account": "حساب کاربری",
@@ -212,7 +212,7 @@ const fa: Dict = {
   "footer.myTickets": "بلیت‌های من",
   "footer.signIn": "ورود",
   "footer.forOrganizers": "برای برگزارکنندگان",
-  "footer.copyright": "© ۲۰۲۶ سامیت",
+  "footer.copyright": "© ۲۰۲۶ اونترا",
   "footer.status": "همه سرویس‌ها فعال",
   "nav.discover": "کشف",
   "nav.myTickets": "بلیت‌های من",
@@ -224,7 +224,7 @@ const fa: Dict = {
   "nav.toggleLang": "تغییر زبان",
   "home.eyebrow": "بلیت‌فروشی منصفانه، در لحظه",
   "home.title": "هر صندلی، زنده. هر بلیت، تضمینی.",
-  "home.subtitle": "سامیت دقیقاً همان لحظه‌ای که صندلی‌ها آزاد می‌شوند، آن‌ها را به شما نشان می‌دهد. صندلی خود را انتخاب کنید، ده دقیقه نگه دارید و بدون رقابت پرداخت کنید.",
+  "home.subtitle": "اونترا دقیقاً همان لحظه‌ای که صندلی‌ها آزاد می‌شوند، آن‌ها را به شما نشان می‌دهد. صندلی خود را انتخاب کنید، ده دقیقه نگه دارید و بدون رقابت پرداخت کنید.",
   "home.cta.find": "رویداد خود را پیدا کنید",
   "home.cta.organizers": "برای برگزارکنندگان",
   "home.featured": "پیشنهاد ویژه",
@@ -327,7 +327,7 @@ const fa: Dict = {
   "auth.password": "رمز عبور",
   "auth.continueAs": "ادامه به‌عنوان",
   "auth.submit": "ادامه",
-  "auth.emailPlaceholder": "you@summit.dev",
+  "auth.emailPlaceholder": "you@eventra.app",
   "role.buyer": "خریدار",
   "role.organizer": "برگزارکننده",
   "role.admin": "مدیر",
@@ -389,7 +389,7 @@ const fa: Dict = {
 
 const dictionaries: Record<Locale, Dict> = { en, fa };
 
-const STORAGE_KEY = "summit.locale";
+const STORAGE_KEY = "eventra.locale";
 
 type I18nContextValue = {
   locale: Locale;

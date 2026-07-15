@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Ticket } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
+import { BrandMark } from "@/components/brand-mark";
 
 export function SiteFooter() {
   const { t } = useI18n();
@@ -9,10 +9,8 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-4 md:px-6">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2 font-semibold tracking-tight">
-            <span className="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
-              <Ticket className="size-4" aria-hidden />
-            </span>
-            {t("brand.name")}
+            <BrandMark className="size-7" />
+            <span>{t("brand.name")}</span>
           </div>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">{t("brand.tagline")}</p>
         </div>

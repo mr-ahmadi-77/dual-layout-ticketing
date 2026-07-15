@@ -16,7 +16,7 @@ export const Route = createFileRoute("/checkout")({
   validateSearch: (search) => searchSchema.parse(search),
   head: () => ({
     meta: [
-      { title: "Order confirmed — Summit" },
+      { title: "Order confirmed — Eventra" },
       { name: "robots", content: "noindex" },
     ],
   }),
