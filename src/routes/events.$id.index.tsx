@@ -19,7 +19,7 @@ export const Route = createFileRoute("/events/$id/")({
           { property: "og:description", content: loaderData.event.description },
           { property: "og:image", content: loaderData.event.image },
         ]
-      : [{ title: "Event — Summit" }],
+      : [{ title: "Event — Eventra" }],
   }),
   notFoundComponent: EventNotFound,
   errorComponent: ({ error, reset }) => (
